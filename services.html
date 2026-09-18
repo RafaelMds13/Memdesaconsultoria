@@ -66,11 +66,24 @@ https://templatemo.com/tm-545-finance-business
 <li class="nav-item">
 <a class="nav-link" href="contact.html">Contato</a>
 </li>
-<li class="nav-item language-selector-item"><select aria-label="Selecionar idioma" class="form-control language-select" id="language-selector" onchange="if (this.value) window.location.href = this.value;"><option lang="pt" selected="selected" value="services.html">Português</option><option lang="en" value="services-en.html">English</option><option lang="es" value="services-es.html">Español</option></select></li></ul>
+<li class="nav-item language-selector-item"><select aria-label="Selecionar idioma" class="form-control language-select" id="language-selector" onchange="handleLanguageChange(this.value)"><option lang="pt" selected="selected" value="services.html">Português</option><option lang="en" value="services-en.html">English</option><option lang="es" value="services-es.html">Español</option></select></li></ul>
 </div>
 </div>
 </nav>
 </header>
+<script>
+function handleLanguageChange(value) {
+  const allowedPages = {
+    "services.html": true,
+    "services-en.html": true,
+    "services-es.html": true
+  };
+
+  if (allowedPages[value]) {
+    window.location.href = value;
+  }
+}
+</script>
 <!-- Page Content -->
 <div class="page-heading header-text">
 <div class="container">
