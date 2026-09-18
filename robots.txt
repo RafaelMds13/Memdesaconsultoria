@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://memdesacialtda.com.br/sitemap.xml
