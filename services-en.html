@@ -66,7 +66,7 @@ https://templatemo.com/tm-545-finance-business
 <li class="nav-item">
 <a class="nav-link" href="contact-en.html">Contact</a>
 </li>
-<li class="nav-item language-selector-item"><select aria-label="Select language" class="form-control language-select" id="language-selector" onchange="if (['services.html','services-en.html','services-es.html'].includes(this.value)) window.location.href = this.value;"><option lang="pt" value="services.html">Português</option><option lang="en" selected="selected" value="services-en.html">English</option><option lang="es" value="services-es.html">Español</option></select></li></ul>
+<li class="nav-item language-selector-item"><select aria-label="Select language" class="form-control language-select" id="language-selector" onchange="var routes={'services.html':'services.html','services-en.html':'services-en.html','services-es.html':'services-es.html'}; var next=routes[this.value]; if(next){ window.location.href = next; }"><option lang="pt" value="services.html">Português</option><option lang="en" selected="selected" value="services-en.html">English</option><option lang="es" value="services-es.html">Español</option></select></li></ul>
 </div>
 </div>
 </nav>
