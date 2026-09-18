@@ -73,14 +73,15 @@ https://templatemo.com/tm-545-finance-business
 </header>
 <script>
 function handleLanguageChange(value) {
-  const allowedPages = {
-    "services.html": true,
-    "services-en.html": true,
-    "services-es.html": true
+  const pageMap = {
+    "services.html": "services.html",
+    "services-en.html": "services-en.html",
+    "services-es.html": "services-es.html"
   };
 
-  if (allowedPages[value]) {
-    window.location.href = value;
+  const nextPage = pageMap[value];
+  if (nextPage) {
+    window.location.href = nextPage;
   }
 }
 </script>
