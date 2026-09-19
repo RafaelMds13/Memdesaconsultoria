@@ -1958,6 +1958,22 @@
 	 * @param {Number} position - The absolute position of the item.
 	 * @protected
 	 */
+	function sanitizeLazyUrl(url) {
+		if (!url) {
+			return '';
+		}
+
+		url = $.trim(url);
+
+		// Allow common safe image URL forms: absolute http(s), protocol-relative,
+		// root-relative, and relative paths. Block dangerous schemes.
+		if (/^(https?:)?\/\//i.test(url) || /^[/.][^\\\s]*$/.test(url) || /^[^:/?#\s][^:\s]*$/.test(url)) {
+			return url;
+		}
+
+		return '';
+	}
+
 	Lazy.prototype.load = function(position) {
 		var $item = this._core.$stage.children().eq(position),
 			$elements = $item && $item.find('.owl-lazy');
@@ -1968,7 +1984,7 @@
 
 		$elements.each($.proxy(function(index, element) {
 			var $element = $(element), image,
-                url = (window.devicePixelRatio > 1 && $element.attr('data-src-retina')) || $element.attr('data-src') || $element.attr('data-srcset');
+                url = sanitizeLazyUrl((window.devicePixelRatio > 1 && $element.attr('data-src-retina')) || $element.attr('data-src') || $element.attr('data-srcset'));
 
 			this._core.trigger('load', { element: $element, url: url }, 'lazy');
 
