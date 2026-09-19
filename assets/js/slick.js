@@ -1461,7 +1461,7 @@
 
                 var trimmedUrl = $.trim(url).toLowerCase();
 
-                if (trimmedUrl.indexOf('javascript:') === 0 || trimmedUrl.indexOf('data:') === 0) {
+                if (trimmedUrl.indexOf('javascript:') === 0 || trimmedUrl.indexOf('data:') === 0 || trimmedUrl.indexOf('vbscript:') === 0) {
                     return false;
                 }
 
