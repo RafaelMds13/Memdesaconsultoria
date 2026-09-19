@@ -98,10 +98,29 @@ https://templatemo.com/tm-545-finance-business
 <li class="nav-item">
 <a class="nav-link" href="contact.html">Contato</a>
 </li>
-<li class="nav-item language-selector-item"><select aria-label="Selecionar idioma" class="form-control language-select" id="language-selector" onchange="if (this.value) window.location.href = this.value;"><option lang="pt" selected="selected" value="index.html">Português</option><option lang="en" value="index-en.html">English</option><option lang="es" value="index-es.html">Español</option></select></li></ul>
+<li class="nav-item language-selector-item"><select aria-label="Selecionar idioma" class="form-control language-select" id="language-selector"><option lang="pt" selected="selected" value="index.html">Português</option><option lang="en" value="index-en.html">English</option><option lang="es" value="index-es.html">Español</option></select></li></ul>
 </div>
 </div>
 </nav>
+<script>
+(function () {
+  var selector = document.getElementById('language-selector');
+  var allowedPages = {
+    'index.html': true,
+    'index-en.html': true,
+    'index-es.html': true
+  };
+
+  if (selector) {
+    selector.addEventListener('change', function () {
+      var nextPage = selector.value;
+      if (allowedPages[nextPage]) {
+        window.location.href = nextPage;
+      }
+    });
+  }
+})();
+</script>
 </header>
 <!-- Page Content -->
 <!-- Banner Starts Here -->
