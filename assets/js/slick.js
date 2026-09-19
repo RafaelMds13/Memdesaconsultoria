@@ -1454,11 +1454,35 @@
 
         function loadImages(imagesScope) {
 
+            function isSafeImageUrl(url) {
+                if (!url || typeof url !== 'string') {
+                    return false;
+                }
+
+                var trimmedUrl = $.trim(url).toLowerCase();
+
+                if (trimmedUrl.indexOf('javascript:') === 0 || trimmedUrl.indexOf('data:') === 0) {
+                    return false;
+                }
+
+                return /^(https?:)?\/\/|^\//.test(trimmedUrl) || !/^[a-z][a-z0-9+\-.]*:/i.test(trimmedUrl);
+            }
+
             $('img[data-lazy]', imagesScope).each(function() {
 
                 var image = $(this),
                     imageSource = $(this).attr('data-lazy'),
                     imageToLoad = document.createElement('img');
+
+                if (!isSafeImageUrl(imageSource)) {
+                    image
+                        .removeAttr( 'data-lazy' )
+                        .removeClass( 'slick-loading' )
+                        .addClass( 'slick-lazyload-error' );
+
+                    _.$slider.trigger('lazyLoadError', [ _, image, imageSource ]);
+                    return;
+                }
 
                 imageToLoad.onload = function() {
 
