@@ -1649,6 +1649,24 @@
             imageSource = image.attr('data-lazy');
             imageToLoad = document.createElement('img');
 
+            var parsedImageSource;
+            try {
+                parsedImageSource = new URL(imageSource, window.location.href);
+            } catch (e) {
+                parsedImageSource = null;
+            }
+
+            if (!parsedImageSource || (parsedImageSource.protocol !== 'http:' && parsedImageSource.protocol !== 'https:')) {
+                image
+                    .removeAttr('data-lazy')
+                    .removeClass('slick-loading')
+                    .addClass('slick-lazyload-error');
+
+                _.$slider.trigger('lazyLoadError', [ _, image, imageSource ]);
+                _.progressiveLazyLoad();
+                return;
+            }
+
             imageToLoad.onload = function() {
 
                 image
