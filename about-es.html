@@ -69,7 +69,7 @@ https://templatemo.com/tm-545-finance-business
 <li class="nav-item">
 <a class="nav-link" href="one-page-es.html">Página única</a>
 </li>
-<li class="nav-item language-selector-item"><select aria-label="Seleccionar idioma" class="form-control language-select" id="language-selector" onchange="if (this.value) window.location.href = this.value;"><option lang="pt" value="about.html">Português</option><option lang="en" value="about-en.html">English</option><option lang="es" selected="selected" value="about-es.html">Español</option></select></li></ul>
+<li class="nav-item language-selector-item"><select aria-label="Seleccionar idioma" class="form-control language-select" id="language-selector"><option lang="pt" value="about.html">Português</option><option lang="en" value="about-en.html">English</option><option lang="es" selected="selected" value="about-es.html">Español</option></select></li></ul>
 </div>
 </div>
 </nav>
@@ -81,6 +81,26 @@ https://templatemo.com/tm-545-finance-business
 <div class="col-md-12">
 <h1>Quiénes somos</h1>
 <span>Gestión financiera adaptada a la realidad de cada empresa.</span>
+</div>
+<script>
+(function () {
+  var selector = document.getElementById('language-selector');
+  if (!selector) return;
+
+  var allowedTargets = {
+    'about.html': true,
+    'about-en.html': true,
+    'about-es.html': true
+  };
+
+  selector.addEventListener('change', function () {
+    var target = this.value;
+    if (allowedTargets[target]) {
+      window.location.href = target;
+    }
+  });
+})();
+</script>
 </div>
 </div>
 </div>
