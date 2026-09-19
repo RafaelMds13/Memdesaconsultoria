@@ -1649,10 +1649,39 @@
             imageSource = image.attr('data-lazy');
             imageToLoad = document.createElement('img');
 
+            // Validate and normalize DOM-provided URL before assigning to src.
+            var sanitizedImageSource = (function(src) {
+                var trimmed = $.trim(src || '');
+                if (!trimmed) {
+                    return null;
+                }
+
+                // Allow http(s), protocol-relative, root-relative, and relative paths.
+                // Also allow data:image/* for common lazy-load placeholders.
+                if (/^(https?:)?\/\//i.test(trimmed) ||
+                    /^[/.][^\\]*$/.test(trimmed) ||
+                    /^data:image\//i.test(trimmed)) {
+                    return trimmed;
+                }
+
+                return null;
+            }(imageSource));
+
+            if (!sanitizedImageSource) {
+                image
+                    .removeAttr( 'data-lazy' )
+                    .removeClass( 'slick-loading' )
+                    .addClass( 'slick-lazyload-error' );
+
+                _.$slider.trigger('lazyLoadError', [ _, image, imageSource ]);
+                _.progressiveLazyLoad();
+                return;
+            }
+
             imageToLoad.onload = function() {
 
                 image
-                    .attr( 'src', imageSource )
+                    .attr( 'src', sanitizedImageSource )
                     .removeAttr('data-lazy')
                     .removeClass('slick-loading');
 
@@ -1660,7 +1689,7 @@
                     _.setPosition();
                 }
 
-                _.$slider.trigger('lazyLoaded', [ _, image, imageSource ]);
+                _.$slider.trigger('lazyLoaded', [ _, image, sanitizedImageSource ]);
                 _.progressiveLazyLoad();
 
             };
@@ -1693,7 +1722,7 @@
 
             };
 
-            imageToLoad.src = imageSource;
+            imageToLoad.src = sanitizedImageSource;
 
         } else {
 
