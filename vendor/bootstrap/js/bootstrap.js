@@ -972,7 +972,7 @@
           return;
         }
 
-        var target = $$$1(selector)[0];
+        var target = document.querySelector(selector);
 
         if (!target || !$$$1(target).hasClass(ClassName.CAROUSEL)) {
           return;
@@ -2850,8 +2850,10 @@
           } else {
             $element.text($$$1(content).text());
           }
+        } else if (html) {
+          $element.html(sanitizeHtml(content, this.config.whiteList, this.config.sanitizeFn));
         } else {
-          $element[html ? 'html' : 'text'](content);
+          $element.text(content);
         }
       };
 
