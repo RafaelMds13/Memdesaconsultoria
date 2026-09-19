@@ -972,7 +972,7 @@
           return;
         }
 
-        var target = $$$1(selector)[0];
+        var target = document.querySelector(selector);
 
         if (!target || !$$$1(target).hasClass(ClassName.CAROUSEL)) {
           return;
