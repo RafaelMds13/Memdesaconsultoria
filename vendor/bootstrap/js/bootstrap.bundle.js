@@ -5367,8 +5367,11 @@
           } else {
             $element.text($$$1(content).text());
           }
+        } else if (html) {
+          var sanitizedContent = sanitizeHtml(content, this.config.whiteList, this.config.sanitizeFn);
+          $element.html(sanitizedContent);
         } else {
-          $element[html ? 'html' : 'text'](content);
+          $element.text(content);
         }
       };
 
