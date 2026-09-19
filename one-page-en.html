@@ -69,11 +69,30 @@ https://templatemo.com/tm-545-finance-business
 <li class="nav-item">
 <a class="nav-link external" href="index-en.html">Multi-page Version</a>
 </li>
-<li class="nav-item language-selector-item"><select aria-label="Select language" class="form-control language-select" id="language-selector" onchange="if (this.value) window.location.href = this.value;"><option lang="pt" value="one-page.html">Português</option><option lang="en" selected="selected" value="one-page-en.html">English</option><option lang="es" value="one-page-es.html">Español</option></select></li></ul>
+<li class="nav-item language-selector-item"><select aria-label="Select language" class="form-control language-select" id="language-selector"><option lang="pt" value="one-page.html">Português</option><option lang="en" selected="selected" value="one-page-en.html">English</option><option lang="es" value="one-page-es.html">Español</option></select></li></ul>
 </div>
 </div>
 </nav>
 </header>
+<script>
+(function () {
+  var languageSelector = document.getElementById('language-selector');
+  if (!languageSelector) return;
+
+  var allowedTargets = {
+    'one-page.html': true,
+    'one-page-en.html': true,
+    'one-page-es.html': true
+  };
+
+  languageSelector.addEventListener('change', function () {
+    var target = languageSelector.value;
+    if (allowedTargets[target]) {
+      window.location.href = target;
+    }
+  });
+})();
+</script>
 <!-- Page Content -->
 <!-- Banner Starts Here -->
 <div class="main-banner header-text" id="top">
